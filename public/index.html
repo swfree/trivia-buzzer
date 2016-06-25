@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buzzer</title>
+    <style type="text/css">
+      body {
+        font-family: Tahoma;
+      }
+      .team {
+        height: 50px;
+        font-size: 16px;
+      }
+      .buzzer {
+        width: 275px;
+        height: 275px;
+        background-color: #FF4F59;
+        color: #fff;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Trivia Buzzer</h1>
+    <input class="team" placeholder="Team Name" type="text"/>
+    <button class="team" onclick="getUser()">Submit</button>
+    <br>
+    <br>
+    <button class="buzzer" onclick="buzz()">BUZZ!</button>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      socket.on('news', function (data) {
+        console.log(data);
+      });
+      socket.on('winner', function(data) {
+        var username = window.localStorage.getItem('username');
+        if (username === 'admin') {
+          console.log('WINNER IS: ', data.username);
+        }
+      });
+
+      var getUser = function() {
+        var username = document.getElementsByTagName("input")[0].value;
+        window.localStorage.setItem('username', username);
+      };
+
+      var buzz = function() {
+        var username = window.localStorage.getItem('username');
+        socket.emit('buzz', { username: username });
+      };
+    </script>
+  </body>
+</html>

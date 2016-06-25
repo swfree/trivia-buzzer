@@ -1,0 +1,19 @@
+{
+  "name": "buzzer",
+  "version": "1.0.0",
+  "description": "simple buzzer app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Skye",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "http": "0.0.0",
+    "path": "^0.12.7",
+    "socket.io": "^1.4.8"
+  }
+}
